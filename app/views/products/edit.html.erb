@@ -1,0 +1,8 @@
+<% if @current_user.id == 1%>
+<h1>Edit Product</h1>
+<%= render 'form' %>
+<%= link_to 'Back', products_path %>
+<% else %>
+<h1>You are not Authorized !!</h1>
+
+<% end %>

@@ -1,0 +1,76 @@
+<%= form_for (@product), html: { multipart: true } do |f| %>
+
+ 
+  <% if @product.errors.any? %>
+    <div id="error_explanation" class="pagination navbar">
+      <h2>
+        <%= pluralize(@product.errors.count, "error") %> prohibited
+        this product from being saved:
+      </h2>
+      <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+
+<% end %>
+<div>
+  
+<table class="navbar table">
+
+  <tr>
+    <td>
+      <%= f.label :name %>
+    </td>
+    <td>
+      <%= f.text_field :name, :class=>"form-control" %>
+    </td>
+  </tr>
+ 
+  <tr>
+    
+  <tr>
+    <td>
+      <%= f.label :price %>
+    </td>
+    <td>
+      <%= f.number_field :price, min: 1 , :class=>"form-control"%> MRP
+     </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :Category %>
+    </td>
+    <td>
+      <%= f.collection_select(:category_id, Category.all, :id, :name , {}, {class: "form-control"}) %>
+     </td>
+     <td>
+       <%= link_to 'Add Category', categories_new_path %>
+     </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :"Product Picture" %>
+    </td>
+    <td>
+      <%= f.file_field :image %>
+    </td>
+  </tr>
+ 
+  <tr>
+    <td>
+      <%= f.submit :'Add Product' , :class => "btn btn-primary"%>
+    </td>
+    <td>
+      <%= f.button :Reset, :type=>"reset", :class => "btn btn-primary" %>
+    </td>
+  </tr>
+
+</table>
+
+</div>
+
+<% end %>

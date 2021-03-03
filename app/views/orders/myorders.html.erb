@@ -1,0 +1,40 @@
+<% if @current_user.id != 1%>
+<h1>My Orders</h1>
+
+<%= form_tag orders_datefilter_path do %>
+  <input type="date" name="start_date" class="col-xs-3" style="margin: 10px;">
+  <input type="date" name="end_date" class="col-xs-3" style="margin: 10px;">
+  <%= submit_tag 'GET ORDER' , class: "btn btn-primary" , style:"margin: 10px;"%>
+<% end %>
+
+<table class="table nav navbar">
+  <tr>
+    <th>Order Date</th>
+    <th>Status</th>
+    <th>Amount</t
+    <th>Actions</th>
+  </tr>
+    <% @orderdata.each do |orderdata| %>
+	   <tr id=<%= orderdata["oid"] %> class="order_tr">
+		    <td><%= orderdata["odate"] %></td>
+		    <td><%= orderdata["ostatus"] %></td>
+	    	<td id=<%= orderdata["oamount"] %> class="amount"><%= orderdata["oamount"] %></td>	
+	    	<% if orderdata["ostatus"] ==  "Processing" %>
+	     		 <td><%= link_to 'Cancel', {:controller => "orders", :action => "destroy", :oid =>  orderdata["oid"]},
+		              method: :delete,
+		              :remote => false,
+		              data: { confirm: 'Are you sure?' } %></td>
+	     	<% end %>
+	  	</tr>	
+	<% end %>
+</table>
+	     	<table>
+	     		<tr>
+	     			<td>Total</td>
+	     			<td id="myOrderTotal" ></td>
+	     		</tr>
+	     	</table>
+<% else %>
+<h1>You are not Authorized !!</h1>
+
+<% end %>

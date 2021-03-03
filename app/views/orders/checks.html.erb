@@ -1,0 +1,24 @@
+<% if @current_user.id == 1%>
+<h1>Checks</h1>
+
+<%= form_tag orders_userfilter_path do %>
+	<%= collection_select(:user,:id, User.where.not(id: 1), :id, :name, {}, {class: "form-control"}) %>
+	<%= submit_tag 'Filter' , class: "btn btn-primary" , style:"margin: 10px;"%>
+<% end %>
+<table class="table nav navbar">
+  <tr>
+    <th>User Name</th>
+    <th>Amount</th>	
+  </tr>
+    <% @uorderdata.each do |uorderdata| %>
+	   <tr id=<%= uorderdata["uid"] %> class="user_order_tr">
+		    <td><%= uorderdata["uname"] %></td>
+		    <td><%= uorderdata["amount"] %></td>
+	  	</tr>	
+	<% end %>
+</table>
+
+<% else %>
+<h1>You are not Authorized !!</h1>
+
+<% end %>

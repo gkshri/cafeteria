@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>  
+
+<% if !logged_in? %>
+
+<h1>Log In</h1>
+<%= form_tag sessions_path do %>
+  <div class="field">
+    <%= label_tag :email %><br />
+    <%= text_field_tag :email, params[:email], :class=>"form-control"%>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password, nil ,class: "form-control" %>
+  </div>
+  </br>	
+  <%= submit_tag 'Log In' , class: "btn btn-primary"%>
+  <p></p>
+  <p><%= link_to 'Forgot password?', password_resets_path %></p>
+<% end %>
+<% else %>
+<h1>You are already logged in, Please Log out  !!</h1>
+
+<% end %>

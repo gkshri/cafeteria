@@ -1,0 +1,55 @@
+<% if @current_user.id == 1%>
+<%= form_for :category, url: categories_path do |f| %>
+ 
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@category.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @category.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+<h1>Add Category</h1>
+
+<div class="container">
+
+<div class="nav navbar">
+  
+<table class="nav navbar navbar-brand">
+
+  <tr >
+    <td>
+      <%= f.label :name %>
+    </td>
+    <td>
+      <%= f.text_field :name , :class=>"form-control"%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= f.submit :'Add Category' , :class => "btn btn-primary" %>
+    </td>
+    <td>
+      <%= f.button :Reset, :type=>"reset" , :class => "btn btn-primary" %>
+    </td>
+  </tr>
+
+</table>
+
+</div>
+
+<% end %>
+
+<%= link_to 'Back', new_product_path %>
+</div>
+<% else %>
+<h1>You are not Authorized !!</h1>
+
+<% end %>

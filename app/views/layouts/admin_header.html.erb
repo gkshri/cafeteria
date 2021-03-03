@@ -1,0 +1,48 @@
+  <!DOCTYPE html>
+<html>
+  <head>
+    <title>Cafeteria</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all'%>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'true' %>
+  </head>
+
+  <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container">
+        <nav>
+          <ul class="navbar-brand navbar-nav navbar-left" style="width: 100%">
+          <!-- TODO add check for admin or normal user -->
+            <% if logged_in?  %>
+              <% if @current_user.id == 1%>
+                <a href="/orders" onclick="document.location='/orders'">Home</a> &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                <a href="/products" onclick="document.location='/products'">Products</a> &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                <a href="/users" onclick="document.location='/users'">Users</a> &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                <a href="/orders/new" onclick="document.location='/orders/new'">Manual Order</a> &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                <a href="/orders/checks" onclick="document.location='/orders/checks'">Checks</a> &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                
+              <% else %>
+                <a href="/orders/new" onclick="document.location='/orders/new'">Home</a> &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                <a href="/orders" onclick="document.location='/orders'">My Orders</a> &nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp
+                
+              <% end %>
+              <%= link_to 'Logout', logout_path %> 
+            <ul class="navbar-brand navbar-nav navbar-right" style="float:right; margin-top: -18px">
+              <%= image_tag(@current_user.image, :size => '48x48', :style => 'display: inline')%>
+              <%= @current_user.name %>
+          </ul>
+            <% else %>  
+                <!-- TODO  -->
+                    
+              <% end %>
+
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+  </html>

@@ -1,0 +1,101 @@
+
+<%= form_for (@user), html: { multipart: true } do |f| %>
+<!-- TODO STyle page -->
+  <% if @user.errors.any? %>
+    <div id="error_explanation" >
+      <h2>
+        <%= pluralize(@user.errors.count, "error") %> prohibited
+        this user from being saved:
+      </h2>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+
+<% end %>
+
+
+<div>
+
+<table class="navbar table">
+
+  <tr>
+    <td>
+      <%= f.label :name%>
+    </td>
+    <td>
+      <%= f.text_field :name, :class=>"form-control"  %>
+    </td>
+  </tr>
+ 
+  <tr>
+    <td>
+      <%= f.label :email %>
+    </td>
+    <td>
+      <%= f.email_field :email, :class=>"form-control"  %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :password %>
+    </td>
+    <td>
+      <%= f.password_field :password, :class=>"form-control"  %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :"Confirm Password" %>
+    </td>
+    <td>
+      <%= f.password_field :password_confirmation, :class=>"form-control"  %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :room %>
+    </td>
+    <td>
+      <%= f.number_field :room, :class=>"form-control"  %>
+     </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :"Ext." %>
+    </td>
+    <td>
+      <%= f.number_field :ext_room, :class=>"form-control"  %>
+     </td>
+  </tr>
+
+  <tr>
+    <td>
+      <%= f.label :"Profile Picture" %>
+    </td>
+    <td>
+      <%= f.file_field :image%>
+    </td>
+  </tr>
+ 
+  <tr>
+    <td>
+      <%= f.submit :'Create User' , :class => "btn btn-primary"  %>
+    </td>
+    <td>
+      <%= f.button :Reset, :type=>"reset", :class => "btn btn-primary"  %>
+    </td>
+  </tr>
+
+</table>
+
+</div>
+
+<% end %>
+

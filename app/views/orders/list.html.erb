@@ -1,0 +1,28 @@
+<% if @current_user.id == 1%>
+<h1>Orders</h1>
+<table class="table nav navbar">
+  <tr>
+    <th>Order Date</th>
+    <th>Name</th>
+    <th>Room</th>
+    <th>Ext.</th>
+    <th>Actions</th>
+  </tr>
+    <% @orderdata.each do |orderdata| %>
+	   <tr id=<%= orderdata["oid"] %> class="order_tr">
+		    <td><%= orderdata["odate"] %></td>
+		    <td><%= orderdata["uname"] %></td>
+	    	<td><%= orderdata["uroom"] %></td>
+	    	<td><%= orderdata["uext"] %></td>	
+	    	<% if orderdata["ostatus"] ==  "Processing" %>
+	     		 <td><%= link_to "Deliver", {:controller => "orders", :action => "deliver", :oid =>  orderdata["oid"]},method: :post, :onclick => '$(this).text("Out for delivery");' %></td>
+	     	<% else %>	
+	     		<td>Out for delivery</td>
+	     	<% end %>
+	  	</tr>	
+	<% end %>
+</table>
+<% else %>
+<h1>You are not Authorized !!</h1>
+
+<% end %>
